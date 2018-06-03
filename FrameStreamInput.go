@@ -32,8 +32,9 @@ type FrameStreamInput struct {
 func NewFrameStreamInput(r io.ReadWriter, bi bool) (input *FrameStreamInput, err error) {
 	input = new(FrameStreamInput)
 	decoderOptions := framestream.DecoderOptions{
-		ContentType:   FSContentType,
-		Bidirectional: bi,
+		ContentType:    FSContentType,
+		Bidirectional:  bi,
+		MaxPayloadSize: 4096,
 	}
 	input.decoder, err = framestream.NewDecoder(r, &decoderOptions)
 	if err != nil {
